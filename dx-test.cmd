@@ -1,0 +1,1 @@
+sfdx force:apex:test:run -c -r human

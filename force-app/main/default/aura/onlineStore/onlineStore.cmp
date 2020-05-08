@@ -1,0 +1,45 @@
+<aura:component controller="OnlineStoreController">
+	<aura:attribute name="user" type="User__c" default="{}" />
+	<aura:attribute name="cartItemsCount" type="Integer" default="0" />
+
+	<!-- Custom routing through whole app -->
+	<aura:attribute name="locationList" type="List" default="[
+		'home', 'about',
+		'login', 'register', 'user',
+		'cart', 'order_reg', 'order_pay'
+	]" />
+	<aura:attribute name="location" type="String" />
+
+	<!-- Set debugMode value to 'false' if you no need debug top bar in whole app -->
+	<c:onlineStoreDebug debugMode="false" user="{!v.user}" locationList="{!v.locationList}" />
+
+	<!-- Event handlers -->
+	<aura:handler name="init" value="{!this}" action="{!c.init}" />
+	<aura:handler event="c:locationUpdateEvent" action="{!c.handleLocationUpdate}" /><!-- Application-level components without name attribute -->
+	<aura:handler event="c:userUpdateEvent" action="{!c.handleUserAuth}" />
+	<aura:handler event="c:showMessageEvent" action="{!c.handleShowMessage}" />
+	<aura:handler event="c:cartItemsCountUpdateEvent" action="{!c.handleCartItemsCountUpdate}" />
+
+	<aura:registerEvent name="locationUpdateEvent" type="c:locationUpdateEvent" />
+	<aura:registerEvent name="userUpdateEvent" type="c:userUpdateEvent" />
+
+	<!-- Header for application (navigation, brief user info) -->
+	<c:onlineStoreHeader user="{!v.user}" cartItemsCount="{!v.cartItemsCount}" location="{!v.location}" />
+
+	<div class="online-store">
+		<!-- ROUTING -->
+		<aura:if isTrue="{! v.location == 'home' || v.location == 'about' }">
+			<c:onlineStoreMain location="{!v.location}" user="{!v.user}" />
+		</aura:if>
+
+		<aura:if isTrue="{! v.location == 'login' || v.location == 'register' || v.location == 'user' }">
+			<c:onlineStoreAuth location="{!v.location}" user="{!v.user}" />
+		</aura:if>
+
+		<aura:if isTrue="{! v.location == 'cart' || v.location == 'order_reg' || v.location == 'order_pay' }">
+			<c:onlineStoreCart location="{!v.location}" user="{!v.user}" />
+		</aura:if>
+		<!-- / ROUTING -->
+	</div>
+
+</aura:component>

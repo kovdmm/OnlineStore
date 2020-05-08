@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BankEmitter__c</fullName>
+    <defaultValue>&#39;U.S. Bank&#39;</defaultValue>
+    <externalId>false</externalId>
+    <label>Bank Emitter</label>
+    <length>50</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

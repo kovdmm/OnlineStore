@@ -1,0 +1,24 @@
+.THIS.wrapper {
+	background: #eee;
+	border-bottom: 1px solid #aaa;
+	box-shadow: 0 2px 5px rgba(39, 38, 38, 0.15);
+}
+
+.THIS .header {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 15px 20px;
+}
+
+.THIS .header__userinfo {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.THIS .header__navigation {
+	display: flex;
+}
+
+.THIS .header__navigation__logo {
+	margin-right: 15px;
+}

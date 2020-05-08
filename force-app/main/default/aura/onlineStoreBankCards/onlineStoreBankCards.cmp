@@ -1,0 +1,61 @@
+<aura:component controller="OnlineStoreBankingController">
+	<aura:attribute name="user" type="User__c" required="true" />
+	<aura:attribute name="cards" type="List" default="[]" />
+	<aura:attribute name="newCard" type="BankCard__c" default="{
+		'Number__c': '',
+		'BankEmitter__c': ''
+	}" />
+
+	<aura:handler name="init" action="{!c.init}" value="{!this}" />
+	<aura:registerEvent name="userDefaultCardUpdateEvent" type="c:userDefaultCardUpdateEvent" />
+
+	<div class="cards">
+		<form class="cards__new-card-form cards__block">
+			<h2 class="slds-page-header__title cards__block__title">Linking a Card</h2>
+			<lightning:card class="cards__card" title="New Card">
+				<aura:set attribute="actions">
+					<lightning:button label="Link Card" variant="brand-outline" onclick="{!c.clickSaveNewCard}" />
+				</aura:set>
+				<div class="cards__card__col">
+					<lightning:input label="Bank Card Number" name="Number__c" value="{!v.newCard.Number__c}" placeholder="1234567890123456" required="true" />
+				</div>
+				<div class="cards__card__col">
+					<lightning:input label="Bank Emitter" name="BankEmitter__c" value="{!v.newCard.BankEmitter__c}" placeholder="U.S. Bank" required="true" />
+				</div>
+			</lightning:card>
+		</form>
+
+		<div class="cards__block">
+			<h2 class="slds-page-header__title cards__block__title">Linked Cards</h2>
+			<aura:if isTrue="{!v.cards.length > 0}">
+				<div class="cards__card-list">
+					<aura:iteration items="{!v.cards}" var="card">
+						<lightning:card 
+							class="cards__card" 
+							title="{!card.Number__c + (card.Id == v.user.DefaultCardId__c ? ' (Default Card)' : '')}">
+							<aura:set attribute="actions">
+								<lightning:button 
+									label="Set Default" name="{!card.Id}" onclick="{!c.clickSetDefaultCard}"
+									disabled="{! card.Id == v.user.DefaultCardId__c }" />
+								<lightning:button label="Delete" variant="destructive" name="{!card.Id}" onclick="{!c.clickDeleteCard}" />
+							</aura:set>
+							<div class="cards__card__col">
+								{!card.BankEmitter__c}
+							</div>
+							<div class="cards__card__col slds-text-align_right">
+								<lightning:formattedNumber value="{!card.Balance__c}" style="currency" />
+							</div>
+						</lightning:card>
+					</aura:iteration>
+				</div>
+
+				<aura:set attribute="else">
+					<div class="cards__no-card-message">
+						<p>You have no linked cards.</p>
+						<p>Link at least one to be able to perform payment.</p>
+					</div>
+				</aura:set>
+			</aura:if>
+		</div>
+	</div>
+</aura:component>

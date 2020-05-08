@@ -1,0 +1,34 @@
+<aura:component>
+	<aura:attribute name="actions" type="Aura.Component[]" required="true" />
+	<aura:attribute name="value" type="Product__c" required="true" />
+
+	<lightning:card>
+		<aura:set attribute="body">
+			<div class="card__body">
+				<div class="card__image-wrapper">
+					<img src="{! $Resource.Asset + v.value.Image__c }" alt="{v.value.Name}"/>
+				</div>
+				<div class="card__text-wrapper">
+					<div class="slds-page-header__title">{!v.value.Name}</div>
+					<div class="product__description">
+						{!v.value.Description__c}
+					</div>
+					<div class="product__info">
+						<div class="product__info__price">${!v.value.Price__c}</div>
+						<div class="slds-text-align--right"><b>In stock: {!v.value.InStock__c}</b></div>
+					</div>
+					<div class="slds-text-align--right">
+						{!v.actions}
+					</div>
+				</div>
+			</div>
+		</aura:set>
+		<aura:set attribute="footer">
+			<div class="slds-text-align--left">
+				<aura:iteration items="{!v.value.ProductCategories__r.records}" var="category">
+					<lightning:badge label="{!category.CategoryId__r.ParentId__r.Name + ': ' + category.CategoryId__r.Name}" />
+				</aura:iteration>
+			</div>
+		</aura:set>
+	</lightning:card>
+</aura:component>

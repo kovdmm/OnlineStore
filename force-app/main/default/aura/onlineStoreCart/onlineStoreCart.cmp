@@ -1,0 +1,41 @@
+<aura:component controller="OnlineStoreCartController">
+	<aura:attribute name="user" type="User__c" required="true" />
+	<aura:attribute name="location" type="String" default="cart" />
+	<aura:attribute name="cart" type="List" default="[]" />
+	<aura:attribute name="totalPrice" type="Double" default="0" />
+
+	<aura:handler name="init" value="{!this}" action="{!c.init}" />
+	
+	<div class="online-store__page cart">
+
+		<aura:if isTrue="{!v.location == 'cart'}">
+			<div class="cart__title slds-page-header__title">
+				Your Cart (items added: {!v.cart.length})
+			</div>
+
+			<!-- CART ITEM LIST -->
+			<aura:iteration items="{!v.cart}" var="cartItem">
+				<lightning:card>
+					<aura:set attribute="title">
+						{!cartItem.ProductId__r.Name}
+					</aura:set>
+					<aura:set attribute="actions">
+						<lightning:badge label="{!cartItem.Quantity__c}" />
+						<lightning:buttonIcon iconName="utility:close" variant="container" 
+							alternativeText="Remove from Cart" name="{!cartItem.ProductId__c}" onclick="{!v.clickRemoveFromCart}" />
+					</aura:set>
+					<aura:set attribute="footer">
+						<p>In Stock: {!cartItem.ProductId__r.InStock__c}</p> 
+						<p>Price: ${!cartItem.ProductId__r.Price__c}</p>
+					</aura:set>
+				</lightning:card>
+			</aura:iteration>
+			<!-- / CART ITEM LIST -->
+
+			<div class="cart__bill">
+				Your Bill: <span>${!v.totalPrice}</span>
+			</div>
+		</aura:if>
+
+	</div>
+</aura:component>

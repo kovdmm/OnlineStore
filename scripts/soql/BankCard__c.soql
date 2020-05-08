@@ -1,0 +1,1 @@
+SELECT Id, OwnerId__c, Balance__c FROM BankCard__c

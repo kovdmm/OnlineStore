@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apple_Devices</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>NAME</columns>
+    <columns>ProductId__c</columns>
+    <columns>CategoryId__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CategoryId__c</field>
+        <operation>equals</operation>
+        <value>Apple</value>
+    </filters>
+    <label>Apple Devices</label>
+</ListView>

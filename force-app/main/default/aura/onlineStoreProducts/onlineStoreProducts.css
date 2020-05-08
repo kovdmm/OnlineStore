@@ -1,0 +1,22 @@
+.THIS .products__sidebar {
+	padding: 20px;
+	margin-left: 20px;
+}
+
+.THIS .products__title, .THIS .products__sidebar {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.THIS .products__title {
+	font-size: 1.5em;
+	padding: 8px 15px;
+	margin-bottom: 20px;
+}
+
+.THIS .products__pagination {
+	margin-top: 20px;
+	text-align: center;
+}

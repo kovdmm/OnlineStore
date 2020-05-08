@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>NAME</columns>
+    <columns>Email__c</columns>
+    <columns>Login__c</columns>
+    <columns>DefaultCardId__c</columns>
+    <columns>Token__c</columns>
+    <columns>Country__c</columns>
+    <columns>Province__c</columns>
+    <columns>City__c</columns>
+    <columns>Street__c</columns>
+    <columns>PostalCode__c</columns>
+    <columns>PassHash__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

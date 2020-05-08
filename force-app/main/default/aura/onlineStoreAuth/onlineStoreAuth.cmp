@@ -1,0 +1,84 @@
+<aura:component controller="OnlineStoreController">
+	<aura:attribute name="location" type="String" default="login" />
+	<aura:attribute name="user" type="User__c" default="{}" />
+	<aura:attribute name="login" type="String" default="" />
+	<aura:attribute name="password" type="String" default="" />
+
+	<aura:handler name="userDefaultCardUpdateEvent" event="c:userDefaultCardUpdateEvent" action="{!c.handleUserDefaultCardUpdate}" />
+	
+	<div class="online-store__page auth">
+		<!-- LOGIN -->
+		<aura:if isTrue="{! v.location == 'login' }">
+			<form class="auth__form">
+				<div class="online-store__form__input-block slds-page-header__title">
+					Login
+				</div>
+				<div class="online-store__form__input-block">
+					<lightning:input aura:id="login_form" label="Login" name="login" value="{!v.login}" placeholder="login" required="true" />
+					<lightning:input aura:id="login_form" label="Password" name="password" value="{!v.password}" type="password" placeholder="••••••" required="true" />
+				</div>
+				<div>
+					<lightning:button label="Log In" onclick="{!c.login}" class="auth__form__button" variant="brand" iconName="utility:unlock" iconPosition="left" />
+				</div>
+			</form>
+		</aura:if>
+		<!-- / LOGIN -->
+	
+		<!-- REGISTER -->
+		<aura:if isTrue="{! v.location == 'register' }">
+			<form class="auth__form">
+				<div class="online-store__form__input-block slds-page-header__title">
+					Register
+				</div>
+				<div class="online-store__form__input-block">
+					<lightning:input aura:id="reg_form" label="Name" value="{!v.user.Name}" placeholder="Your real name" required="true" />
+					<lightning:input aura:id="reg_form" label="Email" value="{!v.user.Email__c}" type="email" placeholder="email@example.com" required="true" />
+					<lightning:input aura:id="reg_form" label="Login" name="login" value="{!v.user.Login__c}" placeholder="login" required="true" />
+					<lightning:input aura:id="reg_form" label="Password" name="password" value="{!v.password}" type="password" placeholder="••••••" required="true" />
+				</div>
+				<div>
+					<lightning:button label="Register" onclick="{!c.register}" class="auth__form__button" variant="brand" iconName="utility:adduser" iconPosition="left" />
+				</div>
+			</form>
+		</aura:if>
+		<!-- / REGISTER -->
+	
+		<!-- USER PROFILE -->
+		<aura:if isTrue="{! v.location == 'user' }">
+			<form class="auth__edit-user">
+				<div class="online-store__form__input-block slds-page-header__title">
+					<b>{!v.user.Login__c}</b> user profile
+				</div>
+				<div class="online-store__form__input-block">
+					<lightning:input label="Name" name="name" value="{!v.user.Name}" required="true" />
+					<lightning:input label="Email" name="email" value="{!v.user.Email__c}" required="true" />
+				</div>
+				<div class="online-store__form__input-block">
+					<lightning:inputAddress
+						addressLabel="Address"
+						streetLabel="Street"
+						cityLabel="City"
+						countryLabel="Country"
+						provinceLabel="Province"
+						postalCodeLabel="PostalCode"
+						street="{!v.user.Street__c}"
+						city="{!v.user.City__c}"
+						country="{!v.user.Country__c}"
+						province="{!v.user.Province__c}"
+						postalCode="{!v.user.PostalCode__c}"
+						fieldLevelHelp="Type your actual address correctly!"
+					/>
+				</div>
+				<div class="online-store__form__input-block">
+					<!-- User Bank Cards -->
+					<c:onlineStoreBankCards user="{!v.user}" />
+				</div>
+				<div>
+					<lightning:button label="Save" onclick="{!c.saveUserData}" class="auth__form__button" variant="brand-outline" iconName="utility:save" iconPosition="left" />
+				</div>
+			</form>
+		</aura:if>
+		<!-- / USER PROFILE -->
+
+	</div>
+</aura:component>

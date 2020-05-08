@@ -1,0 +1,36 @@
+<aura:component controller="OnlineStoreProductsController">
+	<aura:attribute name="chosenCategories" type="List" default="[]" />
+	<aura:attribute name="categories" type="List" default="[]" />
+	<aura:attribute name="minPrice" type="Integer" default="0" />
+	<aura:attribute name="maxPrice" type="Integer" />
+
+	<aura:handler name="init" action="{!c.init}" value="{!this}" />
+
+	<aura:registerEvent name="filtersUpdateEvent" type="c:filtersUpdateEvent" />
+
+	<form class="filters">
+		<div class="filters__price">
+			<lightning:input label="Min Price" value="{!v.minPrice}" />
+			<lightning:input label="Max Price" value="{!v.maxPrice}" />
+		</div>
+
+		<div class="filters__categories">
+			<aura:iteration items="{!v.categories}" var="category">
+				<lightning:select label="{!category.Name}" aura:id="categorySelector">
+					<aura:if isTrue="{!category.Subcategories__r.length > 1}">
+						<option value="">choose one...</option>
+						<aura:iteration items="{!category.Subcategories__r}" var="subcategory">
+							<option value="{!subcategory.Id}">{!subcategory.Name}</option>
+						</aura:iteration>
+
+						<aura:set attribute="else">
+							<option value="{!category.Subcategories__r[0].Id}">{!category.Subcategories__r[0].Name}</option>
+						</aura:set>
+					</aura:if>
+				</lightning:select>
+			</aura:iteration>
+		</div>
+		
+		<lightning:button label="Show Results" iconName="utility:search" iconPosition="left" variant="brand" onclick="{!c.clickShowResults}" />
+	</form>
+</aura:component>

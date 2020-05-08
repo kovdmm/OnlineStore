@@ -1,0 +1,72 @@
+<aura:component controller="OnlineStoreProductsController">
+	<!-- Retrieve as attribute from parent component. -->
+	<aura:attribute name="user" type="User__c" required="true" />
+
+	<!-- Already filtred products. Result list of products. -->
+	<aura:attribute name="products" type="List" default="[]" />
+
+	<!-- Pagination parameters. -->
+	<aura:attribute name="productsOnPage" type="Integer" default="2" />
+	<aura:attribute name="page" type="Integer" default="1" />
+	<aura:attribute name="totalPages" type="Integer" default="1" />
+
+	<!-- Filter paramters -->
+	<aura:attribute name="filters" type="Object" />
+
+	<!-- Events -->
+	<aura:registerEvent name="locationUpdateEvent" type="c:locationUpdateEvent" />
+
+	<!-- Event Handlers -->
+	<aura:handler name="init" action="{!c.init}" value="{!this}" />
+
+	<lightning:layout class="products">
+		<!-- CONTENT -->
+		<lightning:layoutItem size="9">
+			<div class="products__title">
+				Products
+			</div>
+	
+			<!-- PRODUCT LIST -->
+			<aura:if isTrue="{!v.products.length > 0}">
+				<aura:iteration items="{!v.products}" var="product">
+					<c:onlineStoreProductItem value="{!product}" >
+						<aura:set attribute="actions">
+							<lightning:button label="Add to Cart" variant="success" name="{!product.Id}" onclick="{!c.clickAddToCart}" />
+						</aura:set>
+					</c:onlineStoreProductItem>
+				</aura:iteration>
+
+				<aura:set attribute="else">
+					No Results Found
+				</aura:set>
+			</aura:if>
+			<!-- / PRODUCT LIST -->
+	
+			<!-- PAGINATION -->
+			<aura:if isTrue="{!v.totalPages > 1}">
+				<div class="products__pagination">
+					<lightning:buttonGroup>
+						<lightning:buttonIcon iconName="utility:chevronleft" variant="brand" 
+							disabled="{!v.page == 1}" onclick="{!c.clickPrevPage}"/>
+						<span class="slds-button slds-button_neutral">{!v.page}</span>
+						<lightning:buttonIcon iconName="utility:chevronright" variant="brand" 
+							disabled="{!v.page == v.totalPages}"  onclick="{!c.clickNextPage}" />
+					</lightning:buttonGroup>
+				</div>
+			</aura:if>
+			<!-- / PAGINATION -->
+
+		</lightning:layoutItem>
+		<!-- / CONTENT -->
+
+		<!-- SIDEBAR -->
+		<lightning:layoutItem size="3">
+			<div class="products__sidebar">
+				<!-- Product Categories -->
+				<c:onlineStoreProductFilters filtersUpdateEvent="{!c.handleFiltersUpdateEvent}" />
+			</div>
+		</lightning:layoutItem>
+		<!-- / SIDEBAR -->
+	</lightning:layout>
+
+</aura:component>	

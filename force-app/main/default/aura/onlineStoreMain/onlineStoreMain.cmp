@@ -1,0 +1,16 @@
+<aura:component>
+	<aura:attribute name="user" type="User__c" default="{}" />
+	<aura:attribute name="location" type="String" default="home" />
+
+	<div class="online-store__page main">
+		<aura:if isTrue="{!v.location == 'home'}">
+			<c:onlineStoreProducts user="{!v.user}" />
+		</aura:if>
+
+		<aura:if isTrue="{!v.location == 'about'}">
+			<div class="slds-page-header__title">About Us</div>
+			<p>Welcome to OnlineStore. We provide reselling of smartphones here.</p>
+			<p>To buy any item, you should register and add your bank card.</p>
+		</aura:if>
+	</div>
+</aura:component>

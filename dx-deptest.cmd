@@ -1,0 +1,1 @@
+dx-deploy ApexClass & dx-test

@@ -1,0 +1,45 @@
+<aura:component>
+	<aura:attribute name="user" type="User__c" required="true" />
+	<aura:attribute name="location" type="String" required="true" />
+	<aura:attribute name="cartItemsCount" type="Integer" required="true" />
+	
+	<aura:registerEvent name="locationUpdateEvent" type="c:locationUpdateEvent" />
+	<aura:registerEvent name="userUpdateEvent" type="c:userUpdateEvent" />
+	<aura:registerEvent name="showMessageEvent" type="c:showMessageEvent" />
+
+	<aura:handler event="c:locationUpdateEvent" action="{!c.handleLocationUpdate}" />
+
+	<div class="wrapper">
+		<div class="header slds-grid">
+			<div class="header__navigation slds-col">
+				<div class="header__navigation__logo">
+					<lightning:icon iconName="standard:shipment" alternativeText="Online Store"/>
+				</div>
+				<div class="header__navigation__links">
+					<lightning:buttonGroup>
+						<lightning:button label="Home" name="home" aura:id="navigation" onclick="{!c.updateLocation}" />
+						<lightning:button label="About Us" name="about" aura:id="navigation" onclick="{!c.updateLocation}" />
+					</lightning:buttonGroup>
+				</div>
+			</div>
+			<div class="header__userinfo slds-col">
+				<!-- if user authorized: -->
+				<aura:if isTrue="{!v.user.Token__c}">
+					<lightning:buttonGroup>
+						<lightning:button label="{!'Cart [' + v.cartItemsCount + ']'}" name="cart" aura:id="navigation" onclick="{!c.updateLocation}" />
+						<lightning:button label="User" name="user" aura:id="navigation" onclick="{!c.updateLocation}" />
+						<lightning:button label="Logout" onclick="{!c.clickLogout}" />
+					</lightning:buttonGroup>
+
+					<!-- otherwise: -->
+					<aura:set attribute="else">
+						<lightning:buttonGroup>
+							<lightning:button label="Login" name="login" aura:id="navigation" onclick="{!c.updateLocation}" />
+							<lightning:button label="Register" name="register" aura:id="navigation" onclick="{!c.updateLocation}" />
+						</lightning:buttonGroup>
+					</aura:set>
+				</aura:if>
+			</div>
+		</div>
+	</div>
+</aura:component>

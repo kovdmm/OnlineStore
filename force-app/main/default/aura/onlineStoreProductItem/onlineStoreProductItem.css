@@ -1,0 +1,40 @@
+.THIS .card__body {
+	margin: 0 20px 5px;
+	display: flex;
+}
+
+.THIS .card__image-wrapper {
+	width: 35%;
+}
+
+.THIS .card__text-wrapper {
+	width: 65%;
+}
+
+.THIS .card__image-wrapper img {
+	border-radius: 4px;
+	border: 1px solid #ddd;
+}
+
+.THIS .card__text-wrapper {
+	padding-left: 15px;
+}
+
+.THIS .product__description {
+	margin: 15px 0;
+}
+
+.THIS .product__info {
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.THIS .product__info div {
+	width: 50%;
+	line-height: 50px;
+}
+
+.THIS .product__info__price {
+	color: #480;
+	font-size: 2.4em;
+}

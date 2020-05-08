@@ -1,0 +1,22 @@
+.THIS .auth__form, .THIS .auth__edit-user {
+	max-width: 400px;
+	padding: 30px;
+	border-radius: 10px;
+	background: #fff;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+	border: 1px solid #ddd;
+	margin: 20px auto;
+}
+
+.THIS .auth__form {
+	max-width: 400px;
+}
+
+.THIS .auth__edit-user {
+	max-width: 600px;
+}
+
+.THIS .auth__form__button {
+	width: 100%;
+	margin: 20px 0 0;
+}

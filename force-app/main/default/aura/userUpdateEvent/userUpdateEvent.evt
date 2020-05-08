@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event template">
+	<aura:attribute name="user" type="User__c" default="{}" />
+	<aura:attribute name="isAuthorized" type="Boolean" default="false" />
+</aura:event>

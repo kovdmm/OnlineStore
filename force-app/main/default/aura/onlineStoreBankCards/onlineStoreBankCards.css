@@ -1,0 +1,18 @@
+.THIS .cards__block {
+	margin-top: 25px;
+}
+
+.THIS .cards__block__title {
+	margin-bottom: 15px;
+}
+
+.THIS .cards__card .slds-card__body {
+	display: flex;
+	justify-content: space-between;
+}
+
+.THIS .cards__card .slds-card__body .cards__card__col {
+	width: 50%;
+	padding: 0 15px;
+	font-size: 1.1em;
+}

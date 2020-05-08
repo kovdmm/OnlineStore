@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Show message event">
+	<aura:attribute name="title" type="String" />
+	<aura:attribute name="message" type="String" />
+	<aura:attribute name="type" type="String" default="info" />
+</aura:event>

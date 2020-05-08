@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Location Update Event">
+	<aura:attribute name="location" type="String" default="home" />
+</aura:event>

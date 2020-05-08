@@ -1,0 +1,28 @@
+<aura:component>
+	<aura:attribute name="debugMode" type="Boolean" required="true" />
+	<aura:attribute name="locationList" type="List" required="true" />
+	<aura:attribute name="user" type="User__c" required="true" />
+
+	<aura:registerEvent name="locationUpdateEvent" type="c:locationUpdateEvent" />
+	<aura:registerEvent name="userUpdateEvent" type="c:userUpdateEvent" />
+
+	<aura:if isTrue="{!v.debugMode}">
+		<div class="debug">
+			<h1 class="debug__header slds-page-header__title">Debug Mode</h1>
+			<div class="debug__panel debug__routing">
+				<lightning:buttonGroup>
+					<aura:iteration items="{!v.locationList}" var="item">
+						<lightning:button label="{!item}" name="{!item}" onclick="{!c.updateLocation}" />
+					</aura:iteration>
+				</lightning:buttonGroup>
+			</div>
+			<div class="debug__panel debug__auth">
+				<lightning:buttonGroup>
+					<lightning:button label="Login" name="login" onclick="{!c.authUser}" />
+					<lightning:button label="Logout" name="logout" onclick="{!c.authUser}" />
+				</lightning:buttonGroup>
+				User has token: <b>{! !!v.user.Token__c }</b> {! v.user.Token__c ? ' (' + v.user.Token__c + ')' : '' }
+			</div>
+		</div>
+	</aura:if>
+</aura:component>
