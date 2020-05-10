@@ -12,6 +12,7 @@
                 console.log('[REMOTE CALL] [OnlineStoreProductsController.getCart] cart =', JSON.stringify(cart));
 
                 component.set('v.cart', cart);
+                component.set('v.totalPrice', this.calculateBill(cart));
             } else {
                 console.log('[REMOTE CALL] [OnlineStoreProductsController.getCart] state =', state);
             }
@@ -38,10 +39,19 @@
                 });
 
                 component.set('v.cart', cart);
+                component.set('v.totalPrice', this.calculateBill(cart));
             } else {
                 console.log('[REMOTE CALL] [OnlineStoreProductsController.removeFromCart] state =', state);
             }
         });
+    },
+
+    calculateBill: function(cart) {
+        var bill = 0;
+        for (var cartItem of cart) {
+            bill += cartItem.Quantity__c * cartItem.ProductId__r.Price__c;
+        }
+        return bill;
     },
 
     fireRemoteCall: function(action, callback) {
