@@ -70,10 +70,9 @@ public with sharing class OnlineStoreCartController {
     }
 
     @AuraEnabled
-    public static Boolean removeFromCart(String userId, String ProductId) {
+    public static Boolean removeFromCart(String userId, String productId) {
         List<Cart__c> existingRecords = [
-            SELECT Id, Quantity__c, ProductId__r.InStock__c
-            FROM Cart__c 
+            SELECT Id FROM Cart__c 
             WHERE UserId__c = :userId AND ProductId__c = :productId AND Status__c = :added
         ];
 
