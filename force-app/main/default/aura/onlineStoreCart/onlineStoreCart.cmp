@@ -9,7 +9,7 @@
 	<div class="online-store__page cart">
 
 		<aura:if isTrue="{!v.location == 'cart'}">
-			<div class="cart__title slds-page-header__title">
+			<div class="online-store__page__title">
 				Your Cart (items added: {!v.cart.length})
 			</div>
 

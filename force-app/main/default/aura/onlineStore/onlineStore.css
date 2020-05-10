@@ -7,3 +7,26 @@
 .THIS .online-store__form__input-block {
 	margin: 0 0 10px;
 }
+
+.THIS .online-store__page__title, .THIS .online-store__page__sidebar {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.THIS .online-store__page__sidebar {
+	padding: 20px;
+	margin-left: 20px;
+}
+
+.THIS .products__title, .THIS .products__sidebar {
+}
+
+
+.THIS .online-store__page__title {
+	font-size: 1.5em;
+	padding: 8px 15px;
+	margin-bottom: 20px;
+}

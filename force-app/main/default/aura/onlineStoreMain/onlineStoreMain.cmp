@@ -8,7 +8,7 @@
 		</aura:if>
 
 		<aura:if isTrue="{!v.location == 'about'}">
-			<div class="slds-page-header__title">About Us</div>
+			<div class="online-store__page__title">About Us</div>
 			<p>Welcome to OnlineStore. We provide reselling of smartphones here.</p>
 			<p>To buy any item, you should register and add your bank card.</p>
 		</aura:if>
