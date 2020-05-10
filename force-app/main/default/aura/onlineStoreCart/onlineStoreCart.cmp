@@ -22,7 +22,7 @@
 					<aura:set attribute="actions">
 						<lightning:badge label="{!cartItem.Quantity__c}" />
 						<lightning:buttonIcon iconName="utility:close" variant="container" 
-							alternativeText="Remove from Cart" name="{!cartItem.ProductId__c}" onclick="{!v.clickRemoveFromCart}" />
+							alternativeText="Remove from Cart" name="{!cartItem.ProductId__c}" onclick="{!c.clickRemoveFromCart}" />
 					</aura:set>
 					<aura:set attribute="footer">
 						<p>In Stock: {!cartItem.ProductId__r.InStock__c}</p> 
