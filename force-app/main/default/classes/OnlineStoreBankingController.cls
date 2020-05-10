@@ -3,8 +3,8 @@ public with sharing class OnlineStoreBankingController {
 
     @AuraEnabled
     public static String setDefaultCard(String userId, String cardId) {
-        User__c user = [SELECT Id, DefaultCardId__c FROM User__c WHERE Id = :userId LIMIT 1];
-        BankCard__c card = [SELECT Id, OwnerId__c FROM BankCard__c WHERE Id = :cardId LIMIT 1];
+        User__c user = OnlineStoreController.getUser(userId);
+        BankCard__c card = getCard(cardId);
 
         if (user.Id != card.OwnerId__c) return '';
 
@@ -13,18 +13,14 @@ public with sharing class OnlineStoreBankingController {
 
         return cardId;
     }
-    
-    /*
-    TODO: Delete
-    private static BankCard__c getCard(String cardId) {
+
+    public static BankCard__c getCard(String cardId) {
         return [
             SELECT Id, Number__c, BankEmitter__c, Balance__c, OwnerId__c 
             FROM BankCard__c 
-            WHERE Id = :cardId 
-            LIMIT 1
+            WHERE Id = :cardId
         ];
     }
-    */
 
     @AuraEnabled
     public static List<BankCard__c> getCards(String userId) {
