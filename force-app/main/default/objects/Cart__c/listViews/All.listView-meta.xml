@@ -5,7 +5,6 @@
     <columns>UserId__c</columns>
     <columns>ProductId__c</columns>
     <columns>Quantity__c</columns>
-    <columns>Status__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

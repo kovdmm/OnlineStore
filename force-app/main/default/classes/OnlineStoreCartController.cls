@@ -3,7 +3,7 @@ public with sharing class OnlineStoreCartController {
     
     public static String added = 'Added';
     public static String payment = 'Payment';
-    public static String payed = 'Payed';
+    public static String paid = 'Paid';
    	public static String noSuchQuantity = 'There is no such quantity in stock.';
 
     @AuraEnabled
