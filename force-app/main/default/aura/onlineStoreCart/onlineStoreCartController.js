@@ -1,5 +1,6 @@
 ({
     init: function(component, event, helper) {
-        helper.retrieveCart(component, component.get('v.user').Id);
+        var userId = component.get('v.user').Id;
+        helper.retrieveCart(component, userId);
     }
 });
