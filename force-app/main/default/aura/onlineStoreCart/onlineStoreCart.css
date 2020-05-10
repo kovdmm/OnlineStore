@@ -26,3 +26,13 @@
 	font-size: 1.1em;
 	margin-left: 10px;
 }
+
+.THIS .cart__list__empty {
+	font-size: 1.4em;
+}
+
+.THIS .cart__price {
+	color: #480;
+	float: right;
+	padding: 0 0.5em;
+}
