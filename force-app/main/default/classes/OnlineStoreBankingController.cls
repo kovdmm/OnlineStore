@@ -55,4 +55,18 @@ public with sharing class OnlineStoreBankingController {
         delete card;
         return true;
     }
+
+    public static Boolean widthdrawFromCard(String userId, Double amount) {
+        User__c user = OnlineStoreController.getUser(userId);
+
+        if (user.DefaultCardId__c == null) throw new BankingException('You didn\'t set default card.');
+
+        BankCard__c card = user.DefaultCardId__r;
+
+        if (card.Balance__c < amount) throw new BankingException('You have no enough money.');
+
+        card.Balance__c -= amount;
+        update card;
+        return true;
+    }
 }
