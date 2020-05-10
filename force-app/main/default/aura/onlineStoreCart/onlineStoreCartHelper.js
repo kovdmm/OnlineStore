@@ -65,7 +65,8 @@
 
     calculateBill: function(cart) {
         var bill = 0;
-        for (var cartItem of cart) {
+        for (var i in cart) {
+            var cartItem = cart[i];
             bill += cartItem.Quantity__c * cartItem.ProductId__r.Price__c;
         }
         return bill.toFixed(2);

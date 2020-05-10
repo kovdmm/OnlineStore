@@ -2,7 +2,7 @@
 	<aura:attribute name="user" type="User__c" required="true" />
 	<aura:attribute name="location" type="String" default="cart" />
 	<aura:attribute name="cart" type="List" default="[]" />
-	<aura:attribute name="totalPrice" type="Double" default="0" />
+	<aura:attribute name="totalPrice" type="Double" default="0.00" />
 
 	<aura:handler name="init" value="{!this}" action="{!c.init}" />
 	
