@@ -51,7 +51,7 @@
         for (var cartItem of cart) {
             bill += cartItem.Quantity__c * cartItem.ProductId__r.Price__c;
         }
-        return bill;
+        return bill.toFixed(2);
     },
 
     fireRemoteCall: function(action, callback) {
