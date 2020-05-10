@@ -101,6 +101,16 @@ public with sharing class OnlineStoreCartController {
     }
 
     @AuraEnabled
+    public static List<Cart__c> getOrder(String userId) {
+        return getCartUsingStatus(userId, payment);
+    }
+
+    @AuraEnabled
+    public static List<Cart__c> getPaidItems(String userId) {
+        return getCartUsingStatus(userId, paid);
+    }
+
+    @AuraEnabled
     public static Integer getCartItemsCountUsingStatus(String userId, String status) {
         return [
             SELECT COUNT()
@@ -116,6 +126,37 @@ public with sharing class OnlineStoreCartController {
     }
 
     @AuraEnabled
+    public static List<Cart__c> createOrder(String userId) {
+        return updateCartStatus(userId, added, payment);
+    }
+
+    @AuraEnabled
+    public static List<Cart__c> removeOrder(String userId) {
+        return updateCartStatus(userId, payment, added);
+    }
+
+    @AuraEnabled
+    public static Boolean payForOrder(String userId) {
+        Double bill = calculateBill(userId);
+
+        if (OnlineStoreBankingController.widthdrawFromCard(userId, bill)) {
+            updateCartStatus(userId, payment, paid);
+            return true;
+        }
+        
+        return false;
+    }
+
+    public static Double calculateBill(String userId) {
+        List<Cart__c> order = getOrder(userId);
+
+        Double bill = 0;
+        for (Cart__c orderItem: order) {
+            bill += orderItem.Quantity__c * orderItem.ProductId__r.Price__c;
+        }
+        return bill;
+    }
+
     public static List<Cart__c> updateCartStatus(String userId, String oldStatus, String newStatus) {
         List<Cart__c> cartItems = [
             SELECT 
