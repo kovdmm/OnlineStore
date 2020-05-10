@@ -32,9 +32,7 @@
 
                 console.log('[REMOTE CALL] [OnlineStoreProductsController.removeFromCart] deleted =', deleted);
 
-                var cart = component.get('v.cart');
-                
-                var cart = cart.filter(function(cartItem) {
+                var cart = component.get('v.cart').filter(function(cartItem) {
                     return cartItem.ProductId__c != productId;
                 });
 
