@@ -1,4 +1,6 @@
 public with sharing class OnlineStoreBankingController {
+    public inherited sharing class BankingException extends Exception {}
+
     @AuraEnabled
     public static String setDefaultCard(String userId, String cardId) {
         User__c user = [SELECT Id, DefaultCardId__c FROM User__c WHERE Id = :userId LIMIT 1];
