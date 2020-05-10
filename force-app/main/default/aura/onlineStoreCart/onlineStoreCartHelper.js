@@ -44,6 +44,25 @@
         });
     },
 
+    createOrder: function(component, userId) {
+        var action = component.get('c.createOrder');
+        action.setParams({
+            'userId': userId
+        });
+        this.fireRemoteCall(action, function (response) {
+            var state = response.getState();
+            if (state === 'SUCCESS') {
+                var order = response.getReturnValue();
+
+                console.log('[REMOTE CALL] [OnlineStoreProductsController.createOrder] order =', JSON.stringify(order));
+
+                // Go to updaid orders page to perform payment for order
+            } else {
+                console.log('[REMOTE CALL] [OnlineStoreProductsController.createOrder] state =', state);
+            }
+        });
+    },
+
     calculateBill: function(cart) {
         var bill = 0;
         for (var cartItem of cart) {

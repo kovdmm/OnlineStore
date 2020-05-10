@@ -36,6 +36,9 @@
 					<!-- TOTAL PRICE -->
 					<div class="cart__bill">
 						<div class="cart__bill__total">Total: <span>${!v.totalPrice}</span></div>
+						<div class="slds-text-align--right">
+							<lightning:button label="Place an Order" variant="success" onclick="{!c.clickPlaceOrder}" />
+						</div>
 					</div>
 					<!-- /TOTAL PRICE -->
 
