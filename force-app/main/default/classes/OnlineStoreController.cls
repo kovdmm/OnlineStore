@@ -39,6 +39,16 @@ public with sharing class OnlineStoreController {
         }
     }
 
+    public static User__c getUser(String userId) {
+        return [
+            SELECT Id, Name, Login__c, Email__c, Token__c,
+                Street__c, City__c, Country__c, Province__c, PostalCode__c,
+                DefaultCardId__c, DefaultCardId__r.Balance__c
+            FROM User__c
+            WHERE Id = :userId
+        ];
+    }
+
     public static String hashPassword(String password) {
         return SHA256(password);
     }
