@@ -4,6 +4,7 @@ public with sharing class OnlineStoreCartController {
     public static String added = 'Added';
     public static String paid = 'Paid';
     public static String noSuchQuantity = 'There is no such quantity in stock.';
+    public static String adminEmail = 'admin@onlinestore.com';
 
     @AuraEnabled
     public static Integer addToCart(String userId, String productId, Integer quantity) {
@@ -133,6 +134,29 @@ public with sharing class OnlineStoreCartController {
         }
         update cart;
         update products;
+
+        notifyAdminAboutNewSale(userId, bill, cart);
+        notifyUserAboutPurchase(userId, bill, cart);
         return true;
+    }
+
+    public static void notifyAdminAboutNewSale(String userId, Double totalAmount, List<Cart__c> cart) {
+        User__c user = OnlineStoreController.getUser(userId);
+        OnlineStoreController.sendEmailNotification(adminEmail, 'New Sale', 
+            'Hey man! One customer perform a $' + totalAmount + ' payment in our OnlineStore. ' + 
+            'He purchased for ' + cart.size() + ' items' +
+            'Write him on Email to agree terms and conditions. Specify his shipping address. ' + 
+            'Customer name: ' + user.Name + ', contact email: ' + user.Email__c + '. ' + 
+            'Shipping address: ' + user.PostalCode__c + ' ' + user.Country__c + ', ' + user.Province__c + ', ' +
+            user.City__c + ', ' + user.Street__c
+        );
+    }
+
+    public static void notifyUserAboutPurchase(String userId, Double totalAmount, List<Cart__c> cart) {
+        User__c user = OnlineStoreController.getUser(userId);
+        OnlineStoreController.sendEmailNotification(user.Email__c, 'Purchase Information',
+            'Hello, ' + user.Name + '! We are glad to inform you, that you have bought ' + cart.size() + 
+            ' items for $' + totalAmount + ' in OnlineStore. Congratulations!'
+        );
     }
 }
