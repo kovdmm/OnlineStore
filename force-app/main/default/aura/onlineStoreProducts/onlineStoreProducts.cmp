@@ -6,7 +6,7 @@
 	<aura:attribute name="products" type="List" default="[]" />
 
 	<!-- Pagination parameters. -->
-	<aura:attribute name="productsOnPage" type="Integer" default="2" />
+	<aura:attribute name="productsOnPage" type="Integer" default="5" />
 	<aura:attribute name="page" type="Integer" default="1" />
 	<aura:attribute name="totalPages" type="Integer" default="1" />
 
