@@ -4,6 +4,7 @@ public with sharing class OnlineStoreCartController {
     public static String added = 'Added';
     public static String paid = 'Paid';
     public static String noSuchQuantity = 'There is no such quantity in stock.';
+    public static String noAddressFound = 'You didn\'t fill shipping address.';
     public static String adminEmail = 'admin@onlinestore.com';
 
     @AuraEnabled
@@ -116,6 +117,8 @@ public with sharing class OnlineStoreCartController {
 
     @AuraEnabled
     public static Boolean payOrder(String userId) {
+        if (!OnlineStoreController.userHasShippingAddress(userId)) throw new InvalidInputException(noAddressFound);
+
         List<Cart__c> cart = getCart(userId);
 
         Double bill = 0;

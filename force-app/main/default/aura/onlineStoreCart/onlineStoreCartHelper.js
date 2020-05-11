@@ -88,6 +88,8 @@
 
                 var errorMessage = response.getError()[0].message;
                 this.showMessage('Error', errorMessage, 'error');
+
+                if (errorMessage == 'You didn\'t fill shipping address.') this.redirect('user');
             }
         });
 
