@@ -126,7 +126,7 @@ public with sharing class OnlineStoreCartController {
         if (!OnlineStoreBankingController.widthdrawFromCard(userId, bill)) return false;
 
         List<Product__c> products = new List<Product__c>();
-        for (Cart__c item : cart) {
+        for (Cart__c item: cart) {
             item.ProductId__r.InStock__c -= item.Quantity__c;
             if (item.ProductId__r.InStock__c < 0) throw new InvalidInputException(noSuchQuantity);
             item.Status__c = paid;

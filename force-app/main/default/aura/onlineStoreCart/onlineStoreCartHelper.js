@@ -86,7 +86,8 @@
             } else {
                 console.log('[REMOTE CALL] [OnlineStoreProductsController.payOrder] state =', state);
 
-                this.showMessage('Error', response.getError()[0].message, 'error');
+                var errorMessage = response.getError()[0].message;
+                this.showMessage('Error', errorMessage, 'error');
             }
         });
 
