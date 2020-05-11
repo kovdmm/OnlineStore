@@ -7,6 +7,10 @@
 	<aura:attribute name="paidItems" type="List" default="[]" />
 
 	<aura:handler name="init" value="{!this}" action="{!c.init}" />
+	<aura:handler event="c:locationUpdateEvent" action="{!c.init}" />
+
+	<aura:registerEvent name="locationUpdateEvent" type="c:locationUpdateEvent" />
+	<aura:registerEvent name="showMessageEvent" type="c:showMessageEvent" />
 	
 	<div class="online-store__page cart">
 		<lightning:layout>
@@ -41,7 +45,7 @@
 							<div class="cart__bill">
 								<div class="cart__bill__total">Total: <span>${!v.cartTotalPrice}</span></div>
 								<div class="slds-text-align--right">
-									<lightning:button label="Place an Order" variant="success" onclick="{!c.clickPayForOrder}" />
+									<lightning:button label="Pay Order" variant="success" onclick="{!c.clickPayOrder}" />
 								</div>
 							</div>
 							<!-- /TOTAL PRICE -->

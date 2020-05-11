@@ -114,7 +114,7 @@ public with sharing class OnlineStoreCartController {
     }
 
     @AuraEnabled
-    public static Boolean payForOrder(String userId) {
+    public static Boolean payOrder(String userId) {
         List<Cart__c> cart = getCart(userId);
 
         Double bill = 0;
@@ -126,7 +126,8 @@ public with sharing class OnlineStoreCartController {
 
         List<Product__c> products = new List<Product__c>();
         for (Cart__c item : cart) {
-            if (item.Quantity__c < item.ProductId__r.InStock__c) throw new InvalidInputException(noSuchQuantity);
+            item.ProductId__r.InStock__c -= item.Quantity__c;
+            if (item.ProductId__r.InStock__c < 0) throw new InvalidInputException(noSuchQuantity);
             item.Status__c = paid;
             products.add(item.ProductId__r);
         }

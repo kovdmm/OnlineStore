@@ -72,14 +72,40 @@
         return bill.toFixed(2);
     },
 
-    payForOrder: function(component, userId) {
-        this.redirect('paid');
+    payOrder: function(component, userId) {
+        var action = component.get('c.payOrder');
+        action.setParam('userId', userId);
+        this.fireRemoteCall(action, function (response) {
+            var state = response.getState();
+            if (state === 'SUCCESS') {
+                var paid = response.getReturnValue();
+
+                console.log('[REMOTE CALL] [OnlineStoreProductsController.payOrder] paid =', paid);
+
+                this.redirect('paid');
+            } else {
+                console.log('[REMOTE CALL] [OnlineStoreProductsController.payOrder] state =', state);
+
+                this.showMessage('Error', response.getError()[0].message, 'error');
+            }
+        });
+
     },
 
     redirect: function(location) {
         var event = $A.get('e.c:locationUpdateEvent');
         event.setParam('location', location);
         event.fire();
+    },
+
+    showMessage: function(title, message, type) {
+        var showMessage = $A.get('e.c:showMessageEvent');
+        showMessage.setParams({
+            "title": title,
+            "message": message,
+            "type": type
+        });
+        showMessage.fire();
     },
 
     fireRemoteCall: function(action, callback) {
