@@ -59,7 +59,7 @@ public with sharing class OnlineStoreBankingController {
 
         if (user.DefaultCardId__c == null) throw new BankingException('You didn\'t set default card.');
 
-        BankCard__c card = user.DefaultCardId__r;
+        BankCard__c card = OnlineStoreBankingController.getCard(user.DefaultCardId__c);
 
         if (card.Balance__c < amount) throw new BankingException('You have no enough money.');
 

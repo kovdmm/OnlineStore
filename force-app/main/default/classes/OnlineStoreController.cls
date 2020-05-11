@@ -4,7 +4,7 @@ public with sharing class OnlineStoreController {
         List<User__c> users = [
             SELECT Id, Name, Login__c, Email__c, Token__c,
                 Street__c, City__c, Country__c, Province__c, PostalCode__c,
-                DefaultCardId__c, DefaultCardId__r.Balance__c
+                DefaultCardId__c
             FROM User__c
             WHERE Token__c = :token
         ];
@@ -25,7 +25,7 @@ public with sharing class OnlineStoreController {
         List<User__c> users = [
             SELECT Id, Name, Login__c, Email__c, Token__c,
                 Street__c, City__c, Country__c, Province__c, PostalCode__c,
-                DefaultCardId__c, DefaultCardId__r.Balance__c
+                DefaultCardId__c
             FROM User__c
             WHERE Login__c = :login AND PassHash__c = :passHash
         ];
@@ -43,7 +43,7 @@ public with sharing class OnlineStoreController {
         return [
             SELECT Id, Name, Login__c, Email__c, Token__c,
                 Street__c, City__c, Country__c, Province__c, PostalCode__c,
-                DefaultCardId__c, DefaultCardId__r.Balance__c
+                DefaultCardId__c
             FROM User__c
             WHERE Id = :userId
         ];
