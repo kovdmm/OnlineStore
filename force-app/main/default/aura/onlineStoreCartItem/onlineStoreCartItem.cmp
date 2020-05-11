@@ -1,0 +1,25 @@
+<aura:component controller="OnlineStoreCartController">
+	<aura:attribute name="userId" type="String" required="true" />
+	<aura:attribute name="item" type="Cart__c" required="true" />
+
+	<aura:registerEvent name="cartUpdateEvent" type="c:cartUpdateEvent" />
+
+	<lightning:card>
+		<aura:set attribute="title">
+			{!v.item.ProductId__r.Name} <span class="cart__price">${!v.item.ProductId__r.Price__c}</span>
+		</aura:set>
+		<aura:set attribute="actions">
+			<lightning:buttonIcon iconName="utility:dash" variant="container"
+				disabled="{!v.item.Quantity__c == 0}" 
+				onclick="{!c.clickDecQuantity}"/>
+			<lightning:badge label="{!v.item.Quantity__c}" />
+			<lightning:buttonIcon iconName="utility:add" variant="container"
+				disabled="{!v.item.Quantity__c == v.item.ProductId__r.InStock__c}" 
+				onclick="{!c.clickIncQuantity}" />
+
+			<lightning:buttonIcon iconName="utility:close" class="cart__close-button" 
+				alternativeText="Remove from Cart" variant="bare" size="large"
+				name="{!v.item.ProductId__c}" onclick="{!c.clickRemoveFromCart}" />
+		</aura:set>
+	</lightning:card>
+</aura:component>	

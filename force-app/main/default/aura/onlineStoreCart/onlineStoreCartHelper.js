@@ -38,31 +38,6 @@
         });
     },
 
-    removeFromCart: function(component, userId, productId) {
-        var action = component.get('c.removeFromCart');
-        action.setParams({
-            'userId': userId,
-            'productId': productId
-        });
-        this.fireRemoteCall(action, function (response) {
-            var state = response.getState();
-            if (state === 'SUCCESS') {
-                var deleted = response.getReturnValue();
-
-                console.log('[REMOTE CALL] [OnlineStoreProductsController.removeFromCart] deleted =', deleted);
-
-                var cart = component.get('v.cart').filter(function(cartItem) {
-                    return cartItem.ProductId__c != productId;
-                });
-
-                component.set('v.cart', cart);
-                component.set('v.cartTotalPrice', this.calculateBill(cart));
-            } else {
-                console.log('[REMOTE CALL] [OnlineStoreProductsController.removeFromCart] state =', state);
-            }
-        });
-    },
-
     calculateBill: function(cart) {
         var bill = 0;
         for (var i in cart) {

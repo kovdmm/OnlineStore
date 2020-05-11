@@ -25,20 +25,7 @@
 						<aura:if isTrue="{!v.cart.length > 0}">
 							<!-- CART ITEM LIST -->
 							<aura:iteration items="{!v.cart}" var="cartItem">
-								<lightning:card>
-									<aura:set attribute="title">
-										{!cartItem.ProductId__r.Name} <span class="cart__price">${!cartItem.ProductId__r.Price__c}</span>
-									</aura:set>
-									<aura:set attribute="actions">
-										<lightning:badge label="{!cartItem.Quantity__c}" />
-										<lightning:buttonIcon iconName="utility:close" class="cart__close-button" 
-											alternativeText="Remove from Cart" size="large" variant="bare"
-											name="{!cartItem.ProductId__c}" onclick="{!c.clickRemoveFromCart}" />
-									</aura:set>
-									<aura:set attribute="footer">
-										<b>In Stock: {!cartItem.ProductId__r.InStock__c}</b>
-									</aura:set>
-								</lightning:card>
+								<c:onlineStoreCartItem userId="{!v.user.Id}" item="{!cartItem}" cartUpdateEvent="{!c.init}" />
 							</aura:iteration>
 							<!-- / CART ITEM LIST -->
 							<!-- TOTAL PRICE -->
