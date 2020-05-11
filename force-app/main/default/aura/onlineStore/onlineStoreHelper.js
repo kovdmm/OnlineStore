@@ -12,7 +12,7 @@
     setLocationAndRedirectIfNeeded: function(component, userAuthorized, location) {
         if (userAuthorized && this.locationInArray(location, ['login', 'register'])) {
             this.redirect('home');
-        } else if (!userAuthorized && this.locationInArray(location, ['cart', 'order_reg', 'order_pay', 'user'])) {
+        } else if (!userAuthorized && this.locationInArray(location, ['cart', 'paid', 'user'])) {
             this.redirect('login');
         } else {
             component.set('v.location', location);

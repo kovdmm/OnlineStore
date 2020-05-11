@@ -1,7 +1,9 @@
 ({
     init: function(component, event, helper) {
         var userId = component.get('v.user').Id;
+
         helper.retrieveCart(component, userId);
+        helper.retrievePaidItems(component, userId);
     },
 
     clickRemoveFromCart: function(component, event, helper) {
@@ -13,9 +15,9 @@
         helper.removeFromCart(component, userId, productId);
     },
 
-    clickPlaceOrder: function(component, event, helper) {
+    clickPayForOrder: function(component, event, helper) {
         var userId = component.get('v.user').Id;
 
-        helper.createOrder(component, userId);
+        helper.payForOrder(component, userId);
     }
 });

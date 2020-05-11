@@ -6,7 +6,7 @@
 	<aura:attribute name="locationList" type="List" default="[
 		'home', 'about',
 		'login', 'register', 'user',
-		'cart', 'order_reg', 'order_pay'
+		'cart', 'paid'
 	]" />
 	<aura:attribute name="location" type="String" />
 
@@ -36,7 +36,7 @@
 			<c:onlineStoreAuth location="{!v.location}" user="{!v.user}" />
 		</aura:if>
 
-		<aura:if isTrue="{! v.location == 'cart' || v.location == 'order_reg' || v.location == 'order_pay' }">
+		<aura:if isTrue="{! v.location == 'cart' || v.location == 'paid' }">
 			<c:onlineStoreCart location="{!v.location}" user="{!v.user}" />
 		</aura:if>
 		<!-- / ROUTING -->

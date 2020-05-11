@@ -1,53 +1,85 @@
 <aura:component controller="OnlineStoreCartController">
 	<aura:attribute name="user" type="User__c" required="true" />
 	<aura:attribute name="location" type="String" default="cart" />
+
 	<aura:attribute name="cart" type="List" default="[]" />
-	<aura:attribute name="totalPrice" type="Double" default="0.00" />
+	<aura:attribute name="cartTotalPrice" type="Double" default="0.00" />
+	<aura:attribute name="paidItems" type="List" default="[]" />
 
 	<aura:handler name="init" value="{!this}" action="{!c.init}" />
 	
 	<div class="online-store__page cart">
-
-		<aura:if isTrue="{!v.location == 'cart'}">
-			<div class="online-store__page__title">
-				Your Cart (items added: {!v.cart.length})
-			</div>
-
-			<div class="cart__list">
-				<aura:if isTrue="{!v.cart.length > 0}">
-					<!-- CART ITEM LIST -->
-					<aura:iteration items="{!v.cart}" var="cartItem">
-						<lightning:card>
-							<aura:set attribute="title">
-								{!cartItem.ProductId__r.Name} <span class="cart__price">${!cartItem.ProductId__r.Price__c}</span>
-							</aura:set>
-							<aura:set attribute="actions">
-								<lightning:badge label="{!cartItem.Quantity__c}" />
-								<lightning:buttonIcon iconName="utility:close" class="cart__close-button" 
-									alternativeText="Remove from Cart" size="large" variant="bare"
-									name="{!cartItem.ProductId__c}" onclick="{!c.clickRemoveFromCart}" />
-							</aura:set>
-							<aura:set attribute="footer">
-								<b>In Stock: {!cartItem.ProductId__r.InStock__c}</b>
-							</aura:set>
-						</lightning:card>
-					</aura:iteration>
-					<!-- / CART ITEM LIST -->
-					<!-- TOTAL PRICE -->
-					<div class="cart__bill">
-						<div class="cart__bill__total">Total: <span>${!v.totalPrice}</span></div>
-						<div class="slds-text-align--right">
-							<lightning:button label="Place an Order" variant="success" onclick="{!c.clickPlaceOrder}" />
-						</div>
+				<!-- CART -->
+				<aura:if isTrue="{!v.location == 'cart'}">
+					<div class="online-store__page__title">
+						Your Cart (items added: {!v.cart.length})
 					</div>
-					<!-- /TOTAL PRICE -->
 
-					<aura:set attribute="else">
-						<div class="cart__list__empty">Your cart is empty!</div>
-					</aura:set>
+					<div class="cart__list">
+						<aura:if isTrue="{!v.cart.length > 0}">
+							<!-- CART ITEM LIST -->
+							<aura:iteration items="{!v.cart}" var="cartItem">
+								<lightning:card>
+									<aura:set attribute="title">
+										{!cartItem.ProductId__r.Name} <span class="cart__price">${!cartItem.ProductId__r.Price__c}</span>
+									</aura:set>
+									<aura:set attribute="actions">
+										<lightning:badge label="{!cartItem.Quantity__c}" />
+										<lightning:buttonIcon iconName="utility:close" class="cart__close-button" 
+											alternativeText="Remove from Cart" size="large" variant="bare"
+											name="{!cartItem.ProductId__c}" onclick="{!c.clickRemoveFromCart}" />
+									</aura:set>
+									<aura:set attribute="footer">
+										<b>In Stock: {!cartItem.ProductId__r.InStock__c}</b>
+									</aura:set>
+								</lightning:card>
+							</aura:iteration>
+							<!-- / CART ITEM LIST -->
+							<!-- TOTAL PRICE -->
+							<div class="cart__bill">
+								<div class="cart__bill__total">Total: <span>${!v.cartTotalPrice}</span></div>
+								<div class="slds-text-align--right">
+									<lightning:button label="Place an Order" variant="success" onclick="{!c.clickPayForOrder}" />
+								</div>
+							</div>
+							<!-- /TOTAL PRICE -->
+
+							<aura:set attribute="else">
+								<div class="cart__list__empty">Your cart is empty.</div>
+							</aura:set>
+						</aura:if>
+					</div>
 				</aura:if>
-			</div>
-		</aura:if>
+				<!-- / CART -->
+				
+				<!-- PAID -->
+				<aura:if isTrue="{!v.location == 'paid'}">
+					<div class="online-store__page__title">
+						Paid Items
+					</div>
+
+					<div class="cart__list">
+						<aura:if isTrue="{!v.paidItems.length > 0}">
+							<!-- PAID ITEM LIST -->
+							<aura:iteration items="{!v.paidItems}" var="cartItem">
+								<lightning:card>
+									<aura:set attribute="title">
+										{!cartItem.ProductId__r.Name} <span class="cart__price">${!cartItem.ProductId__r.Price__c}</span>
+									</aura:set>
+									<aura:set attribute="actions">
+										<lightning:badge label="{!cartItem.Quantity__c}" />
+									</aura:set>
+								</lightning:card>
+							</aura:iteration>
+							<!-- / PAID ITEM LIST -->
+
+							<aura:set attribute="else">
+								<div class="cart__list__empty">Your have no purchased items. Buy something in our store.</div>
+							</aura:set>
+						</aura:if>
+					</div>
+				</aura:if>
+				<!-- / PAID -->
 
 	</div>
 </aura:component>

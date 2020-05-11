@@ -4,21 +4,17 @@
     <defaultValue>&#39;Added&#39;</defaultValue>
     <externalId>false</externalId>
     <label>Status</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
+        <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
                 <fullName>Added</fullName>
                 <default>true</default>
                 <label>Added</label>
-            </value>
-            <value>
-                <fullName>Payment</fullName>
-                <default>false</default>
-                <label>Payment</label>
             </value>
             <value>
                 <fullName>Paid</fullName>

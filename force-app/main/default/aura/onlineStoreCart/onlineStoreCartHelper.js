@@ -12,15 +12,15 @@
                 console.log('[REMOTE CALL] [OnlineStoreProductsController.getCart] cart =', JSON.stringify(cart));
 
                 component.set('v.cart', cart);
-                component.set('v.totalPrice', this.calculateBill(cart));
+                component.set('v.cartTotalPrice', this.calculateBill(cart));
             } else {
                 console.log('[REMOTE CALL] [OnlineStoreProductsController.getCart] state =', state);
             }
         });
     },
 
-    removeFromCart: function(component, userId, productId) {
-        var action = component.get('c.removeFromCart');
+    retrievePaidItems: function(component, userId) {
+        var action = component.get('c.getPaidItems');
         action.setParams({
             'userId': userId,
             'productId': productId
