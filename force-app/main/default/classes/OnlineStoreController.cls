@@ -110,4 +110,16 @@ public with sharing class OnlineStoreController {
     public static Integer getCartItemsCount(String userId) {
         return OnlineStoreCartController.getCartItemsCount(userId);
     }
+
+    public static Boolean userHasShippingAddress(String userId) {
+        User__c user = getUser(userId);
+        if (
+            user.Country__c != null && 
+            user.Province__c != null && 
+            user.City__c != null && 
+            user.Street__c != null && 
+            user.PostalCode__c != null
+        ) return true;
+        return false;
+    }
 }
