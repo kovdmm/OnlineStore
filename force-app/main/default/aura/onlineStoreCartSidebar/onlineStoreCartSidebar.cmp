@@ -1,0 +1,17 @@
+<aura:component >
+	<aura:attribute name="location" type="String" required="true" />
+	<aura:attribute name="navigation" type="List" default="[
+		{'label': 'Cart', 'location': 'cart'},
+		{'label': 'Purchased Items', 'location': 'paid'}
+	]" />
+
+	<aura:registerEvent name="locationUpdateEvent" type="c:locationUpdateEvent" />
+
+	<div class="navigation">
+		<aura:iteration items="{!v.navigation}" var="item">
+			<lightning:button label="{!item.label}" name="{!item.location}" onclick="{!c.clickUpdateLocation}"
+				variant="{!item.location == v.location ? 'brand' : 'neutral'}" disabled="{!item.location == v.location}" 
+				class="navigation__item" />
+		</aura:iteration>
+	</div>
+</aura:component>	

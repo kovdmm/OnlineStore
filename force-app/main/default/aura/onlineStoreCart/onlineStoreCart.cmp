@@ -9,6 +9,8 @@
 	<aura:handler name="init" value="{!this}" action="{!c.init}" />
 	
 	<div class="online-store__page cart">
+		<lightning:layout>
+			<lightning:layoutItem size="9">
 				<!-- CART -->
 				<aura:if isTrue="{!v.location == 'cart'}">
 					<div class="online-store__page__title">
@@ -80,6 +82,13 @@
 					</div>
 				</aura:if>
 				<!-- / PAID -->
+			</lightning:layoutItem>
+			<lightning:layoutItem size="3">
+				<div class="online-store__page__sidebar">
+					<c:onlineStoreCartSidebar location="{!v.location}" locationUpdateEvent="{!c.handleLocationUpdate}" />
+				</div>
+			</lightning:layoutItem>
+		</lightning:layout>
 
 	</div>
 </aura:component>
