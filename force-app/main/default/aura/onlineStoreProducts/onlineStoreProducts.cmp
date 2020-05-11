@@ -22,8 +22,15 @@
 	<lightning:layout class="products">
 		<!-- CONTENT -->
 		<lightning:layoutItem size="9">
-			<div class="online-store__page__title">
-				Products
+			<div class="online-store__page__title products__title">
+				<p>Products</p>
+				<p>
+					<lightning:select onchange="{!c.productsOnPageChanged}" value="{!v.productsOnPage}">
+						<aura:iteration items="2,5,10,20" var="onPage">
+							<option value="{!onPage}">{!onPage}</option>
+						</aura:iteration>
+					</lightning:select>
+				</p>
 			</div>
 	
 			<!-- PRODUCT LIST -->

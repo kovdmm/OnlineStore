@@ -41,5 +41,14 @@
         var productId = event.getSource().get('v.name');
 
         helper.addToCart(component, user.Id, productId);
+    },
+
+    productsOnPageChanged: function(component, event, helper) {
+        var productsOnPage = event.getSource().get('v.value');
+        var page = 1;
+
+        component.set('v.page', page);
+        component.set('v.productsOnPage', productsOnPage);
+        helper.retrieveProducts(component, page, productsOnPage);
     }
 });

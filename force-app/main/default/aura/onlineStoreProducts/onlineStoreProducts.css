@@ -2,3 +2,21 @@
 	margin-top: 20px;
 	text-align: center;
 }
+
+.THIS .products__title {
+	display: flex;
+}
+
+.THIS .products__title p {
+	width: 50%;
+}
+
+.THIS p .slds-form-element {
+	float: right;
+	width: auto;
+	font-size: 0.667em;
+}
+
+.THIS .products__title label {
+	display: none;
+}
